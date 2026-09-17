@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-subscriptions
+      author: Alexey
+      comment: Create user subscriptions table
+
+      preConditions:
+        - onFail: HALT
+        - not:
+            tableExists:
+              tableName: subscriptions
+
+      changes:
+        - createTable:
+            tableName: subscriptions
+            columns:
+              - column:
+                  name: login
+                  type: VARCHAR(255)
+                  remarks: User login from Keycloak
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: type
+                  type: VARCHAR(20)
+                  remarks: Subscription type
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expires_at
+                  type: TIMESTAMP
+                  remarks: Subscription expiration timestamp
+
+      rollback:
+        - dropTable:
+            tableName: subscriptions
