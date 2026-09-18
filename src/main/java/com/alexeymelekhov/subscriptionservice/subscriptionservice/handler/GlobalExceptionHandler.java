@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDTO> handleNotFoundException(ResourceNotFoundException e) {
 
         ErrorResponseDTO error = new ErrorResponseDTO(
-                HttpStatus.NO_CONTENT.value(),
+                HttpStatus.NOT_FOUND.value(),
                 e.getMessage(),
                 new HashMap<>()
         );
