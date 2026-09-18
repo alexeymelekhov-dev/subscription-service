@@ -1,6 +1,7 @@
 package com.alexeymelekhov.subscriptionservice.subscriptionservice.handler;
 
 import com.alexeymelekhov.subscriptionservice.subscriptionservice.dto.ErrorResponseDTO;
+import com.alexeymelekhov.subscriptionservice.subscriptionservice.exception.ErrorMessage;
 import com.alexeymelekhov.subscriptionservice.subscriptionservice.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,18 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(error);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponseDTO> handleException() {
+        ErrorResponseDTO error = new ErrorResponseDTO(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                ErrorMessage.INTERNAL_SERVER_ERROR.getMessage(),
+                new HashMap<>()
+        );
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(error);
     }
 }

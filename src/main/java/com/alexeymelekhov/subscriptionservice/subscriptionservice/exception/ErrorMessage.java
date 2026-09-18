@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum ErrorMessage {
 
-    SUBSCRIPTION_NOT_FOUND("Subscription not found with id: %s");
+    SUBSCRIPTION_NOT_FOUND("Subscription not found with id: %s"),
+    INTERNAL_SERVER_ERROR("Internal server error");
 
     private final String message;
 
