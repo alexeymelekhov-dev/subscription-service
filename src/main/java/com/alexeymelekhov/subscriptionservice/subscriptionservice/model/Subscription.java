@@ -21,6 +21,6 @@ public class Subscription {
     @Column(nullable = false)
     private SubscriptionType type;
 
-    @Column(name = "expires_at", nullable = false)
+    @Column(name = "expires_at")
     private LocalDateTime expiresAt;
 }
